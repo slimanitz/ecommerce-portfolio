@@ -103,7 +103,7 @@ fs.readFile('./api/routes/index.js', (error, buff) => {
   const data = buff
     .toString()
     .replace('// __IMPORT__', `const ${entityName} = require('./${entityName}');\n// __IMPORT__`)
-    .replace('// __ROUTE__', `router.use('./${entityName}s', ${entityName});\n// __ROUTE__`);
+    .replace('// __ROUTE__', `router.use('/${entityName}s', ${entityName});\n// __ROUTE__`);
   fs.writeFile('./api/routes/index.js', data, (err) => {
     if (err) console.log(err);
     console.log('Route Added.');
