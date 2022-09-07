@@ -6,6 +6,7 @@ const APIError = require('../../utils/api-error');
 const schema = Joi.object({
   fullName: Joi.string().required(),
   email: Joi.string().required(),
+  orders: Joi.array().required(),
 
 });
 
