@@ -32,10 +32,8 @@ const getAll = async () => {
 const update = async (id, payload) => {
   const { error, value } = schema.validate(payload);
   if (error) throw new APIError('Bad Payload', httpStatus.BAD_REQUEST);
-  await get(id);
-  const updateCode = await User.updateOne({ _id: id }, { ...value });
-  if (!updateCode.ok) throw new APIError('Not Found', httpStatus.NOT_FOUND);
-  const updatedValue = await User.findById(id);
+  const updatedValue = await User.findByIdAndUpdate(id, value);
+  if (!updatedValue) throw new APIError('Not Found', httpStatus.NOT_FOUND);
   return updatedValue;
 };
 
