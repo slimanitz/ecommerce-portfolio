@@ -1,14 +1,15 @@
 const express = require('express');
-require('express-async-errors');
-const product = require('./product');
+const health = require('./health');
 const order = require('./order');
 const user = require('./user');
+const product = require('./product');
 // __IMPORT__
 
 const router = express.Router();
-router.use('/products', product);
+router.use('/ping', health);
 router.use('/orders', order);
 router.use('/users', user);
+router.use('/products', product);
 // __ROUTE__
 
 module.exports = router;

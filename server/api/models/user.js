@@ -5,8 +5,8 @@ const mongoClient = require('../../config/database');
 const userSchema = new mongoose.Schema(
   {
     fullName: { type: String },
-    email: { type: String, unique: true },
-    orders: [{ type: String, default: [] }],
+    email: { type: String },
+    orders: [{ type: String }],
 
   },
   { timestamps: true },
