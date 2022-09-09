@@ -4,7 +4,7 @@ const Order = require('../models/order');
 const APIError = require('../../utils/api-error');
 
 const schema = Joi.object({
-  date: Joi.date().required(),
+  date: Joi.date(),
   totalPrice: Joi.number().required(),
   orderContent: Joi.string().required(),
 
