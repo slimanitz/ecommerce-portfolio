@@ -10,7 +10,7 @@ const { jwtSecret } = require('../../config/vars');
 const schema = Joi.object({
   fullName: Joi.string().required(),
   email: Joi.string().required(),
-  orders: Joi.array().required(),
+  orders: Joi.array(),
   password: Joi.string().required(),
 });
 
@@ -69,8 +69,8 @@ const login = async (payload) => {
   const { error } = loginSchema.validate(payload);
   if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
   const user = await User
-    .findOne().and([{ email: payload.email }, { password: hashPassword(payload.password) }]);
-  if (!user) throw new APIError({ message: 'Wrong credentials', status: httpStatus.BAD_REQUEST });
+    .findOne({ email: payload.email });
+  if (!bcrypt.compareSync(payload.password, user.password)) throw new APIError({ message: 'Wrong credentials', status: httpStatus.BAD_REQUEST });
   return generateToken({ id: user._id });
 };
 
