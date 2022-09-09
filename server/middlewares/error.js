@@ -7,7 +7,7 @@ const errorHandler = (err, req, res, next) => {
   if (!(err instanceof APIError)) {
     error = new APIError({ message: err.message, status: httpStatus.INTERNAL_SERVER_ERROR });
   }
-  res.status(error.status).send(error.message);
+  res.status(error.status).send({ message: error.message });
 };
 
 module.exports = { errorHandler };

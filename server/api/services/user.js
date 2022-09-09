@@ -1,18 +1,40 @@
+/* eslint-disable no-underscore-dangle */
 const httpStatus = require('http-status');
 const Joi = require('joi');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const APIError = require('../../utils/api-error');
+const { jwtSecret } = require('../../config/vars');
 
 const schema = Joi.object({
   fullName: Joi.string().required(),
   email: Joi.string().required(),
   orders: Joi.array().required(),
+  password: Joi.string().required(),
+});
 
+const generateToken = (user) => {
+  // eslint-disable-next-line no-underscore-dangle
+  const token = jwt.sign({ id: user._id, email: user.email }, jwtSecret);
+  return token;
+};
+
+const hashPassword = (password) => {
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  return hash;
+};
+
+const loginSchema = Joi.object({
+  email: Joi.string().required(),
+  password: Joi.string().required(),
 });
 
 const create = async (user) => {
   const { error, value } = schema.validate(user);
   if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
+  value.password = hashPassword(user.password);
   const newUser = new User(value);
   await newUser.save();
   return newUser;
@@ -43,10 +65,23 @@ const remove = async (id) => {
   await User.findByIdAndDelete(id);
 };
 
+const login = async (payload) => {
+  console.log('entering here');
+  const { error } = loginSchema.validate(payload);
+  if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
+  const user = await User
+    .findOne().and([{ email: payload.email }, { password: hashPassword(payload.password) }]);
+  console.log('entering here');
+  if (!user) throw new APIError({ message: 'Wrong credentials', status: httpStatus.BAD_REQUEST });
+  console.log('entering here');
+  return generateToken({ id: user._id });
+};
+
 module.exports.userService = {
   create,
   get,
   getAll,
   update,
   remove,
+  login,
 };

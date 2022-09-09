@@ -29,10 +29,16 @@ const remove = async (req, res) => {
   res.status(httpStatus.OK).json(user);
 };
 
+const login = async (req, res) => {
+  const token = await userService.login(req.body);
+  res.status(httpStatus.OK).json({ token });
+};
+
 module.exports = {
   create,
   get,
   getAll,
   update,
   remove,
+  login,
 };

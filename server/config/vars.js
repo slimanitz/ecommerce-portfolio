@@ -4,4 +4,5 @@ const { env } = process;
 
 module.exports = {
   mongoUrl: env.MONGO_URL,
+  jwtSecret: env.JWT_SECRET,
 };
