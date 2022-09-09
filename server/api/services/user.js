@@ -66,14 +66,11 @@ const remove = async (id) => {
 };
 
 const login = async (payload) => {
-  console.log('entering here');
   const { error } = loginSchema.validate(payload);
   if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
   const user = await User
     .findOne().and([{ email: payload.email }, { password: hashPassword(payload.password) }]);
-  console.log('entering here');
   if (!user) throw new APIError({ message: 'Wrong credentials', status: httpStatus.BAD_REQUEST });
-  console.log('entering here');
   return generateToken({ id: user._id });
 };
 
