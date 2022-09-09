@@ -1,0 +1,38 @@
+.searchInput,.btn-outline-secondary
+ {
+    padding: 5px;
+    border-radius: 20px;
+    border-color:   lightgrey !important;
+}
+
+.cart{
+    border-radius: 50%;
+    background-color: #6f4e37;
+}
+
+
+.customLink{
+    color: white !important;
+    font-size: 20px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    border-radius: 20px;
+
+}
+
+
+
+div.navRow{
+    background-color: #6f4e37;
+}
+
+a.customLink:hover{
+    background-color: #3B1C0A;
+    
+
+    
+}
+
+
+
+
