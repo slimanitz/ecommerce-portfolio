@@ -18,6 +18,7 @@ export default function Home() {
             modules={[Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
             spaceBetween={50}
             slidesPerView={1}
+            autoplay
             effect="fade"
             pagination={{
               clickable: true,
@@ -60,6 +61,20 @@ export default function Home() {
               </div>
             </SwiperSlide>
           </Swiper>
+        </div>
+        <div className="row text-center mt-5">
+          <p className={styles.title}>Welcome to ICOFFEE</p>
+        </div>
+        <div className="row">
+          <p className="subTitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a
+            fermentum urna. Nulla facilisi. Integer rutrum augue et purus
+            vehicula maximus. Praesent eget quam ullamcorper, finibus sapien
+            non, semper mauris. Donec sed odio scelerisque arcu commodo pretium
+            eget at velit. Nulla mattis porta auctor. Curabitur et felis eget
+            diam venenatis dapibus. Pellentesque ligula purus, interdum ac nunc
+            lobortis, tincidunt porttitor mi.
+          </p>
         </div>
       </div>
     </>

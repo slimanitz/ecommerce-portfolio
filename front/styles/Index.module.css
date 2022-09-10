@@ -15,9 +15,23 @@
 
 
 .swiper-pagination-bullet {
-
     text-align: center;
     color: #000;
     opacity: 1;
     background: rgba(0, 0, 0, 0.2);
+}
+
+
+p.title {
+    font-size: 30px;
+    color: #6f4e37;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+p.subTitle {
+    font-size: 15px;
+    color: black;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
 }
