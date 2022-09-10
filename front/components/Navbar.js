@@ -6,7 +6,7 @@ export default function Navbar() {
     <div className="container-fluid mt-3">
       <div className="row">
         <div className="col-sm justify-content-center">
-          <div class="input-group  my-5  w-50  mx-auto">
+          <div className="input-group  my-5  w-50  mx-auto">
             <input
               type="text"
               class={`form-control ${styles.seachInput}`}
