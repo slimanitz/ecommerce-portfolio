@@ -1,0 +1,23 @@
+.carouselBg {
+    background-color: #ece0d1;
+    position: relative;
+}
+
+.carouselImage {
+    height: 50vh;
+    width: 50vw;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+.swiper-pagination-bullet {
+
+    text-align: center;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+}

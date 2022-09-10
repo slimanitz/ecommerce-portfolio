@@ -1,20 +1,20 @@
-.searchInput,.btn-outline-secondary
- {
+.searchInput,
+.btn-outline-secondary {
     padding: 5px;
     border-radius: 20px;
-    border-color:   lightgrey !important;
+    border-color: lightgrey !important;
 }
 
-.cart{
+.cart {
     border-radius: 50%;
     background-color: #6f4e37;
 }
 
 
-.customLink{
+.customLink {
     color: white !important;
     font-size: 20px;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     border-radius: 20px;
 
@@ -22,17 +22,10 @@
 
 
 
-div.navRow{
+div.navRow {
     background-color: #6f4e37;
 }
 
-a.customLink:hover{
+a.customLink:hover {
     background-color: #3B1C0A;
-    
-
-    
 }
-
-
-
-
