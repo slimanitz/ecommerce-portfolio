@@ -35,3 +35,27 @@ p.subTitle {
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
 }
+
+
+img.characteristics {
+    height: 2vh;
+    width: 2vw;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p.cacTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    color: #6f4e37;
+    font-weight: 600;
+}
+
+p.cacSubTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: lightgrey;
+    font-weight: 300;
+
+}

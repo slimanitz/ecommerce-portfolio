@@ -65,8 +65,8 @@ export default function Home() {
         <div className="row text-center mt-5">
           <p className={styles.title}>Welcome to ICOFFEE</p>
         </div>
-        <div className="row">
-          <p className="subTitle">
+        <div className="row text-center justify-content-center">
+          <p className="subTitle w-50">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a
             fermentum urna. Nulla facilisi. Integer rutrum augue et purus
             vehicula maximus. Praesent eget quam ullamcorper, finibus sapien
@@ -75,6 +75,65 @@ export default function Home() {
             diam venenatis dapibus. Pellentesque ligula purus, interdum ac nunc
             lobortis, tincidunt porttitor mi.
           </p>
+        </div>
+        <div className="row mx- mt-5 ">
+          <div className="col-2"></div>
+          <div className="col-8 ">
+            <div className="row">
+              <div className="col-4">
+                <div className="row">
+                  <img src="/leaf.svg" width="50px" height="50px" />
+                </div>
+                <div className="row text-center">
+                  <p className={`${styles.cacTitle}`}>Always Fresh</p>
+                </div>
+                <div className="row text-center">
+                  <p className={`${styles.cacsubTitle}`}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec a fermentum urna. Nulla facilisi. Integer rutrum augue
+                    et purus vehicula maximus. Praesent eget quam ullamcorper,
+                    finibus sapien
+                  </p>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="row">
+                  <img src="/health.svg" width="50px" height="50px" />
+                </div>
+                <div className="row text-center">
+                  <p className={`${styles.cacTitle}`}>Healthy</p>
+                </div>
+                <div className="row text-center">
+                  <p className={`${styles.cacsubTitle}`}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec a fermentum urna. Nulla facilisi. Integer rutrum augue
+                    et purus vehicula maximus. Praesent eget quam ullamcorper,
+                    finibus sapien
+                  </p>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="row">
+                  <img src="/premium.svg" width="50px" height="50px" />
+                </div>
+                <div className="row text-center">
+                  <p className={`${styles.cacTitle}`}>Premium quality</p>
+                </div>
+                <div className="row text-center">
+                  <p className={`${styles.cacsubTitle}`}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec a fermentum urna. Nulla facilisi. Integer rutrum augue
+                    et purus vehicula maximus. Praesent eget quam ullamcorper,
+                    finibus sapien
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-2"></div>
+        </div>
+        <div className="row">
+          <p className="text-center">Deals of the day</p>
         </div>
       </div>
     </>
