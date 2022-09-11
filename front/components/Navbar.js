@@ -3,7 +3,7 @@ import styles from '../styles/Navbar.module.css'
 
 export default function Navbar() {
   return (
-    <div className="container-fluid mt-3">
+    <div className=" mt-3">
       <div className="row">
         <div className="col-sm justify-content-center">
           <div className="input-group  my-5  w-50  mx-auto">
@@ -30,7 +30,7 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-      <div className={`row mt-3 py-4 ${styles.navRow}`}>
+      <div className={`row mt-3 py-4 px-0 ${styles.navRow}`}>
         <ul className="nav justify-content-center">
           <li className="nav-item mr-4">
             <a className={`nav-link ${styles.customLink}`} href="#">
