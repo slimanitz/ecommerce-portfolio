@@ -1,0 +1,24 @@
+.footer {
+    background-color: #dbc1ac;
+}
+
+.title {
+    color: #6f4e37;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.subTitle {
+    color: grey;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.submit {
+    background-color: #6f4e37 !important;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
