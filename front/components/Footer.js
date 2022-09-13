@@ -62,26 +62,76 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="row my-4">
+        <div className="row my-5">
           <div className="col-4">
-            <img
-              src="/shipping.svg"
-              className=" col-4 mr-2"
-              width={100}
-              height={100}
-              alt=""
-            />
-            <div className="col-8 ">
-              <p className={`${styles.title}`}>FREE SHIPPING ITEM</p>
-              <p className={`${styles.subTitle}`}>Shipping detail </p>
+            <div className="row">
+              <img
+                src="/shipping.svg"
+                className=" col-4"
+                width={80}
+                height={80}
+                alt=""
+              />
+              <div className="col-8 ">
+                <p className={`${styles.title} mb-0`}>FREE SHIPPING ITEM</p>
+                <p className={`${styles.subTitle}`}>Shipping detail </p>
+              </div>
             </div>
           </div>
-          <div className="col-4"></div>
-          <div className="col-4"></div>
+          <div className="col-4">
+            <div className="row">
+              <img
+                src="/lock.svg"
+                className="col-4"
+                width={80}
+                height={80}
+                alt=""
+              />
+              <div className="col-8 ">
+                <p className={`${styles.title} mb-0`}>SECURE PAYMENT</p>
+                <p className={`${styles.subTitle}`}>Payment policy </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-4">
+            <div className="row">
+              <img
+                src="/shipping.svg"
+                className={`col-4`}
+                width={80}
+                height={80}
+                alt=""
+              />
+              <div className="col-8 ">
+                <p className={`${styles.title} mb-0`}>FREE SHIPPING ITEM</p>
+                <p className={`${styles.subTitle}`}>Shipping detail </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="col-1"></div>
+      <div className="row bg-light mb-0">
+        <div className="col-1"></div>
+        <div className="col-6">
+          <p className={`${styles.designer} py-4`}>
+            Designed By Slimanitz !! All rights Reserved
+          </p>
+        </div>
+        <div className="col-4">
+          <div className="row">
+            <div className="col-6"></div>
+            <p className={`${styles.payment} col-3 pt-3 mr-0`}>
+              Payment accept
+            </p>
+            <img className="col-1 " src="/mastercard.svg" />
+            <img className="col-1 " src="/visa.svg" />
+            <img className="col-1 " src="/paypal.svg" />
+          </div>
+        </div>
+        <div className="col-1"></div>
+      </div>
     </div>
   )
 }
