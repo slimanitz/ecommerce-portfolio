@@ -79,7 +79,7 @@ export default function Home() {
         <div className="col-2"></div>
         <div className="col-8 ">
           <div className="row">
-            <div className="col-4">
+            <div className="col-lg-4 col-sm-10 ">
               <div className="row">
                 <img src="/leaf.svg" width="50px" height="50px" />
               </div>
@@ -95,7 +95,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="col-4">
+            <div className="col-lg-4 col-sm-10">
               <div className="row">
                 <img src="/health.svg" width="50px" height="50px" />
               </div>
@@ -111,7 +111,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="col-4">
+            <div className="col-lg-4 col-sm-10">
               <div className="row">
                 <img src="/premium.svg" width="50px" height="50px" />
               </div>
@@ -132,7 +132,7 @@ export default function Home() {
         <div className="col-2"></div>
       </div>
       <div className="row">
-        <p className="text-center">Deals of the day</p>
+        <p className={`${styles.deal} text-center`}>Deals of the day</p>
       </div>
     </div>
   )

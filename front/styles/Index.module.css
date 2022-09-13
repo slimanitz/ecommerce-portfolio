@@ -59,3 +59,11 @@ p.cacSubTitle {
     font-weight: 300;
 
 }
+
+
+.deal {
+    font-size: 30px;
+    font-family: 'Poppins', sans-serif;
+    color: #6f4e37;
+    font-weight: 600;
+}
