@@ -8,12 +8,13 @@ const schema = Joi.object({
   category: Joi.string().required(),
   quantity: Joi.number().required(),
   price: Joi.number().required(),
+  pics: Joi.array(),
 
 });
 
 const create = async (product) => {
   const { error, value } = schema.validate(product);
-  if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
+  if (error) throw new APIError('Bad Payload', httpStatus.BAD_REQUEST);
   const newProduct = new Product(value);
   await newProduct.save();
   return newProduct;
@@ -32,7 +33,7 @@ const getAll = async () => {
 
 const update = async (id, payload) => {
   const { error, value } = schema.validate(payload);
-  if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
+  if (error) throw new APIError('Bad Payload', httpStatus.BAD_REQUEST);
   const updatedValue = await Product.findByIdAndUpdate(id, value);
   if (!updatedValue) throw new APIError('Not Found', httpStatus.NOT_FOUND);
   return updatedValue;
