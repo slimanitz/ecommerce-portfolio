@@ -2,8 +2,8 @@ const httpStatus = require('http-status');
 const { productService } = require('../services/product');
 
 const create = async (req, res) => {
-  const newproduct = await productService.create(req.body);
-  res.status(httpStatus.OK).json(newproduct);
+  const newproduct = await productService.create(req.body, req.files);
+  res.status(httpStatus.OK).json();
 };
 
 const getAll = async (req, res) => {
