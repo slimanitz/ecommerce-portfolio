@@ -12,10 +12,15 @@ const schema = Joi.object({
 
 });
 
-const create = async (product) => {
-  const { error, value } = schema.validate(product);
+const create = async (body, files) => {
+  const { error, value } = schema.validate(body);
   if (error) throw new APIError('Bad Payload', httpStatus.BAD_REQUEST);
   const newProduct = new Product(value);
+  if (files) {
+    files.forEach((file) => {
+      newProduct.pics.push(file.path);
+    });
+  }
   await newProduct.save();
   return newProduct;
 };
