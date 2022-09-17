@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import styles from '../styles/Navbar.module.css'
 
@@ -23,11 +24,13 @@ export default function Navbar() {
             </div>
           </div>
           <div className="col-sm justify-content-center " align={'center'}>
-            <Image src={'/logo.png'} layout="fixed" width={200} height={200} />
+            <img src={'/logo.png'} width={200} height={200} alt="" />
           </div>
-          <div className="col-sm   text-center ">
-            <button className={`btn  my-5 btn-xl ${styles.cart}`}>
-              <i className="bi bi-cart"></i>
+
+          <div class="cart col-sm   text-center">
+            <button type="button" class={`btn  my-5 ${styles.cart} p-3`}>
+              <img src="/cart.svg" height={30} width={30} alt=""></img>
+              <span class="badge badge-light">1</span>
             </button>
           </div>
         </div>
