@@ -12,11 +12,11 @@ const initalState = {}
 const middleware = [thunk]
 
 // creating store
-export const store = configureStore(
-  rootReducer,
-  initalState,
-  composeWithDevTools(applyMiddleware(...middleware)),
-)
+export const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: initalState,
+  middleware,
+})
 
 // assigning store to next wrapper
 const makeStore = () => store

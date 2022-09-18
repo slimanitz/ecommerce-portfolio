@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-import { wrapper, store } from '../store'
+import { wrapper, store } from '../redux/store'
 import Layout from '../components/Layout'
 import Head from 'next/head'
 import { Provider } from 'react-redux'
