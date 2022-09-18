@@ -1,8 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
+import { useSelector } from 'react-redux'
 import styles from '../styles/Navbar.module.css'
 
 export default function Navbar() {
+  const cart = useSelector((state) => state.cartReducer.cart)
+
   return (
     <div className="container-fluid">
       <div className=" mt-3">
@@ -30,7 +33,7 @@ export default function Navbar() {
           <div class="cart col-sm   text-center">
             <button type="button" class={`btn  my-5 ${styles.cart} p-3`}>
               <img src="/cart.svg" height={30} width={30} alt=""></img>
-              <span class="badge badge-light">1</span>
+              <span class="badge badge-light">{cart.length}</span>
             </button>
           </div>
         </div>

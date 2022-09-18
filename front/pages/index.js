@@ -7,8 +7,19 @@ import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/effect-fade'
 import styles from '../styles/Index.module.css'
+import allActions from '../redux/actions'
+import { useDispatch } from 'react-redux'
 
 export default function Home() {
+  const dispatch = useDispatch()
+
+  const product = { name: 'Depresso', quantity: 1 }
+
+  const handleAddToCart = () => {
+    console.log(allActions)
+    dispatch(allActions.cartActions.addToCart(product))
+  }
+
   return (
     <div className="container-fluid ">
       <div className="row">
@@ -133,6 +144,9 @@ export default function Home() {
       </div>
       <div className="row">
         <p className={`${styles.deal} text-center`}>Deals of the day</p>
+        <button className="btn btn-primary" onClick={handleAddToCart}>
+          Add to cart
+        </button>
       </div>
     </div>
   )
