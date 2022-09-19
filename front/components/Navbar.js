@@ -30,10 +30,10 @@ export default function Navbar() {
             <img src={'/logo.png'} width={200} height={200} alt="" />
           </div>
 
-          <div class="cart col-sm   text-center">
-            <button type="button" class={`btn  my-5 ${styles.cart} p-3`}>
+          <div className="cart col-sm   text-center">
+            <button type="button" className={`btn  my-5 ${styles.cart} p-3`}>
               <img src="/cart.svg" height={30} width={30} alt=""></img>
-              <span class="badge badge-light">{cart.length}</span>
+              <span className="badge badge-light">{cart.length}</span>
             </button>
           </div>
         </div>
