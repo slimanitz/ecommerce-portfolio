@@ -1,7 +1,7 @@
-const login = (user) => {
+const login = (user, token) => {
   return {
     type: 'LOGIN',
-    payload: userObj,
+    payload: { user, token },
   }
 }
 

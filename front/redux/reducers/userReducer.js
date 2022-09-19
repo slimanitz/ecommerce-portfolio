@@ -3,8 +3,9 @@ const currentUser = (state = {}, action) => {
     case 'LOGIN':
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.user,
         loggedIn: true,
+        token: action.payload.token,
       }
     case 'LOG_OUT':
       return {
