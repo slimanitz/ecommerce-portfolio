@@ -16,7 +16,6 @@ export default function Home() {
   const product = { name: 'Depresso', quantity: 1 }
 
   const handleAddToCart = () => {
-    console.log(allActions)
     dispatch(allActions.cartActions.addToCart(product))
   }
 
