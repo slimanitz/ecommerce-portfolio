@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { NextResponse } from 'next/server'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -12,18 +13,20 @@ export default function Login() {
     formState: { errors },
   } = useForm()
 
+  const router = useRouter()
+
   const dispatch = useDispatch()
   const onSubmit = async ({ email, password }) => {
     const response = await API.post('/users/login', { email, password })
-    if (response.status === 200)
+    if (response.status === 200) {
       dispatch(
         allActions.userActions.login({
           user: response.data.user,
           token: response.data.token,
         }),
-        NextResponse.redirect('/logged'),
       )
-    else NextResponse.redirect('/login')
+      router.push('/logged')
+    } else router.push('/login')
   }
 
   return (

@@ -35,8 +35,8 @@ const remove = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const token = await userService.login(req.body);
-  res.status(httpStatus.OK).json({ token });
+  const user = await userService.login(req.body);
+  res.status(httpStatus.OK).json(user);
 };
 
 module.exports = {

@@ -1,4 +1,4 @@
-const login = (user, token) => {
+const login = ({ user, token }) => {
   return {
     type: 'LOGIN',
     payload: { user, token },
@@ -11,4 +11,4 @@ const logOut = () => {
   }
 }
 
-export { login, logOut }
+export default { login, logOut }

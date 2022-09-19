@@ -105,7 +105,7 @@ const login = async (payload) => {
       status: httpStatus.BAD_REQUEST,
     });
   }
-  return generateToken({ id: user._id });
+  return { user, token: generateToken({ id: user._id }) };
 };
 
 module.exports.userService = {
