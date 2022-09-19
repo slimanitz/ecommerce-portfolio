@@ -5,9 +5,18 @@ import styles from '../styles/Navbar.module.css'
 
 export default function Navbar() {
   const cart = useSelector((state) => state.cartReducer.cart)
+  const userReducer = useSelector((state) => state.userReducer)
 
   return (
     <div className="container-fluid">
+      {userReducer.user && (
+        <div className="row">
+          <div className=" col-3 mr-auto">
+            <p>Logged in as: {userReducer.user?.fullName}</p>
+          </div>
+        </div>
+      )}
+
       <div className=" mt-3">
         <div className="row">
           <div className="col-sm justify-content-center">

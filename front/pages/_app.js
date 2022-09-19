@@ -5,6 +5,7 @@ import { wrapper, store } from '../redux/store'
 import Layout from '../components/Layout'
 import Head from 'next/head'
 import { Provider } from 'react-redux'
+import { RouteGuard } from '../components/RouteGuard'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Layout>
-        <Component {...pageProps} />
+        <RouteGuard>
+          <Component {...pageProps} />
+        </RouteGuard>
       </Layout>
     </Provider>
   )

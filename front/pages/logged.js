@@ -1,7 +1,14 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 export default function Logged() {
-  const user = useSelector((state) => state.userReducer.user)
-  const token = useSelector((state) => state.userReducer.token)
-  return <div>logged as:{user.fullName + token}</div>
+  const userReducer = useSelector((state) => state.userReducer)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!userReducer.user) router.push('/')
+  }, [])
+
+  return <div>logged as:{userReducer.user.fullName + userReducer.token}</div>
 }
