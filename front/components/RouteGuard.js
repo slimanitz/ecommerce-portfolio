@@ -27,7 +27,7 @@ function RouteGuard({ children }) {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [userReducer.user])
 
   function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
@@ -37,7 +37,6 @@ function RouteGuard({ children }) {
       setAuthorized(false)
       router.push({
         pathname: '/login',
-        query: { returnUrl: router.asPath },
       })
     } else {
       setAuthorized(true)
