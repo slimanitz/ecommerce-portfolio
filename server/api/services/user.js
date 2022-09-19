@@ -33,7 +33,27 @@ const loginSchema = Joi.object({
 
 const create = async (user) => {
   const { error, value } = schema.validate(user);
-  if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
+  if (error) {
+    throw new APIError({
+      message: error.message,
+      status: httpStatus.BAD_REQUEST,
+    });
+  }
+  value.password = hashPassword(user.password);
+  const newUser = new User(value);
+  await newUser.save();
+  return newUser;
+};
+
+const signup = async (user) => {
+  const { error, value } = schema.validate(user);
+  if (error) {
+    throw new APIError({
+      message: error.message,
+      status: httpStatus.BAD_REQUEST,
+    });
+  }
+  if (await User.findOne({ email: user.email })) throw new APIError({ message: `User with the following ${user.email} already exists`, status: httpStatus.CONFLICT });
   value.password = hashPassword(user.password);
   const newUser = new User(value);
   await newUser.save();
@@ -53,7 +73,12 @@ const getAll = async () => {
 
 const update = async (id, payload) => {
   const { error, value } = schema.validate(payload);
-  if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
+  if (error) {
+    throw new APIError({
+      message: error.message,
+      status: httpStatus.BAD_REQUEST,
+    });
+  }
   const updatedValue = await User.findByIdAndUpdate(id, value);
   if (!updatedValue) throw new APIError('Not Found', httpStatus.NOT_FOUND);
   return updatedValue;
@@ -67,10 +92,19 @@ const remove = async (id) => {
 
 const login = async (payload) => {
   const { error } = loginSchema.validate(payload);
-  if (error) throw new APIError({ message: error.message, status: httpStatus.BAD_REQUEST });
-  const user = await User
-    .findOne({ email: payload.email });
-  if (!bcrypt.compareSync(payload.password, user.password)) throw new APIError({ message: 'Wrong credentials', status: httpStatus.BAD_REQUEST });
+  if (error) {
+    throw new APIError({
+      message: error.message,
+      status: httpStatus.BAD_REQUEST,
+    });
+  }
+  const user = await User.findOne({ email: payload.email });
+  if (!bcrypt.compareSync(payload.password, user.password)) {
+    throw new APIError({
+      message: 'Wrong credentials',
+      status: httpStatus.BAD_REQUEST,
+    });
+  }
   return generateToken({ id: user._id });
 };
 
@@ -81,4 +115,5 @@ module.exports.userService = {
   update,
   remove,
   login,
+  signup,
 };

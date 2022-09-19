@@ -6,6 +6,11 @@ const create = async (req, res) => {
   res.status(httpStatus.OK).json(newuser);
 };
 
+const signup = async (req, res) => {
+  const newuser = await userService.signup(req.body);
+  res.status(httpStatus.OK).json(newuser);
+};
+
 const getAll = async (req, res) => {
   const users = await userService.getAll();
   res.status(httpStatus.OK).json(users);
@@ -41,4 +46,5 @@ module.exports = {
   update,
   remove,
   login,
+  signup,
 };
