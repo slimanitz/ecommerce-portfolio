@@ -1,11 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from 'next/image'
-import { useSelector } from 'react-redux'
-import styles from '../styles/Navbar.module.css'
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import styles from '../styles/Navbar.module.css';
+import Nav from 'react-bootstrap/Nav';
 
 export default function Navbar() {
-  const cart = useSelector((state) => state.cartReducer.cart)
-  const userReducer = useSelector((state) => state.userReducer)
+  const cart = useSelector((state) => state.cartReducer.cart);
+  const userReducer = useSelector((state) => state.userReducer);
 
   return (
     <div className="container-fluid">
@@ -49,28 +51,52 @@ export default function Navbar() {
         <div className={`row mt-3 py-4 px-0 ${styles.navRow}`}>
           <ul className="nav justify-content-center">
             <li className="nav-item mr-lg-4">
-              <a className={`nav-link ${styles.customLink}`} href="#">
-                Home
-              </a>
+              <Link className={`nav-link ${styles.customLink}`} href="/">
+                <Nav.Link
+                  as={'a'}
+                  className={`nav-link ${styles.customLink}`}
+                  href="/"
+                >
+                  Home
+                </Nav.Link>
+              </Link>
             </li>
             <li className="nav-item mx-lg-4">
-              <a className={`nav-link ${styles.customLink}`} href="#">
-                Product
-              </a>
+              <Link href="/product">
+                <Nav.Link
+                  as={'a'}
+                  className={`nav-link ${styles.customLink}`}
+                  href="/product"
+                >
+                  Product
+                </Nav.Link>
+              </Link>
             </li>
             <li className="nav-item mx-lg-4">
-              <a className={`nav-link ${styles.customLink}`} href="#">
-                About
-              </a>
+              <Link className={`nav-link ${styles.customLink}`} href="/about">
+                <Nav.Link
+                  as={'a'}
+                  className={`nav-link ${styles.customLink}`}
+                  href="/about"
+                >
+                  About
+                </Nav.Link>
+              </Link>
             </li>
             <li className="nav-item ml-lg-4">
-              <a className={`nav-link ${styles.customLink}`} href="#">
-                Contact
-              </a>
+              <Link className={`nav-link ${styles.customLink}`} href="/contact">
+                <Nav.Link
+                  as={'a'}
+                  className={`nav-link ${styles.customLink}`}
+                  href="/contact"
+                >
+                  Contact
+                </Nav.Link>
+              </Link>
             </li>
           </ul>
         </div>
       </div>
     </div>
-  )
+  );
 }
