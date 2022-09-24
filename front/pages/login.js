@@ -1,32 +1,33 @@
-import { useRouter } from 'next/router'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import API from '../axios'
-import allActions from '../redux/actions'
+import { useRouter, withRouter } from 'next/router';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import API from '../axios';
+import allActions from '../redux/actions';
 
-export default function Login() {
+function Login(props) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onSubmit = async ({ email, password }) => {
-    const response = await API.post('/users/login', { email, password })
+    const response = await API.post('/users/login', { email, password });
     if (response.status === 200) {
       dispatch(
         allActions.userActions.login({
           user: response.data.user,
           token: response.data.token,
-        }),
-      )
-      router.push('/logged')
-    } else router.push('/login')
-  }
+        })
+      );
+      console.log(props.router);
+      router.push(props.router.query.redirect || 'logged');
+    } else router.push('/login');
+  };
 
   return (
     <div className="row">
@@ -69,5 +70,7 @@ export default function Login() {
         </div>
       </form>
     </div>
-  )
+  );
 }
+
+export default withRouter(Login);

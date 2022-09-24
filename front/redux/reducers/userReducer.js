@@ -6,16 +6,17 @@ const currentUser = (state = {}, action) => {
         user: action.payload.user,
         loggedIn: true,
         token: action.payload.token,
-      }
+      };
     case 'LOG_OUT':
       return {
         ...state,
         user: {},
         loggedIn: false,
-      }
-    default:
-      return state
-  }
-}
+      };
 
-export default currentUser
+    default:
+      return state;
+  }
+};
+
+export default currentUser;

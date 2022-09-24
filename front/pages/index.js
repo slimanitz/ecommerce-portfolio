@@ -1,28 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
-import { Pagination, Scrollbar, A11y, EffectFade, Autoplay } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import 'swiper/css/scrollbar'
-import 'swiper/css/effect-fade'
-import styles from '../styles/Index.module.css'
-import allActions from '../redux/actions'
-import { useDispatch } from 'react-redux'
+import { Pagination, Scrollbar, A11y, EffectFade, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/effect-fade';
+import styles from '../styles/Index.module.css';
+import allActions from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import ProductCard from '../components/ProductCard';
 
 export default function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const product = { name: 'Depresso', quantity: 1 }
+  const product = { name: 'Depresso', quantity: 1 };
 
   const handleAddToCart = () => {
-    dispatch(allActions.cartActions.addToCart(product))
-  }
+    dispatch(allActions.cartActions.addToCart(product));
+  };
 
   return (
     <div className="container-fluid ">
       <div className="row">
         <Swiper
+          key={1}
           // install Swiper modules
           modules={[Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
           spaceBetween={50}
@@ -146,7 +148,67 @@ export default function Home() {
         <button className="btn btn-primary" onClick={handleAddToCart}>
           Add to cart
         </button>
+        <Swiper
+          key={2}
+          // install Swiper modules
+          modules={[Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
+          spaceBetween={1}
+          slidesPerView={3}
+          autoplay
+          effect="fade"
+          pagination={{
+            clickable: true,
+            type: 'bullets',
+          }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log('slide change')}
+        >
+          <SwiperSlide>
+            <div className="row">
+              <ProductCard
+                productId={1234}
+                productName={'coffee machine nespresso'}
+                price={0}
+                description={'This is a basic product '}
+              />
+              <ProductCard
+                productId={1234}
+                productName={'coffee machine nespresso'}
+                price={0}
+                description={'This is a basic product '}
+              />
+              <ProductCard
+                productId={1234}
+                productName={'coffee machine nespresso'}
+                price={0}
+                description={'This is a basic product '}
+              />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide>
+            <div className="row">
+              <ProductCard
+                productId={1234}
+                productName={'coffee machine nespresso'}
+                price={0}
+                description={'This is a basic product '}
+              />
+              <ProductCard
+                productId={1234}
+                productName={'coffee machine nespresso'}
+                price={0}
+                description={'This is a basic product '}
+              />
+              <ProductCard
+                productId={1234}
+                productName={'coffee machine nespresso'}
+                price={0}
+                description={'This is a basic product '}
+              />
+            </div>
+          </SwiperSlide>
+        </Swiper>
       </div>
     </div>
-  )
+  );
 }
