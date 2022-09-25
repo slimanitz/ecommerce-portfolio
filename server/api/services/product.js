@@ -18,7 +18,7 @@ const create = async (body, files) => {
   const newProduct = new Product(value);
   if (files) {
     files.forEach((file) => {
-      newProduct.pics.push(file.path);
+      newProduct.pics.push(file.filename);
     });
   }
   await newProduct.save();

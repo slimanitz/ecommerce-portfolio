@@ -8,16 +8,44 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/effect-fade';
 import styles from '../styles/Index.module.css';
 import allActions from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductCard from '../components/ProductCard';
+import { useEffect } from 'react';
+import API from '../axios';
+import { Carousel } from 'react-bootstrap';
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  const product = { name: 'Depresso', quantity: 1 };
+  useEffect(() => {
+    API.get('/products').then((response) =>
+      dispatch(allActions.productActions.getProducts(response.data))
+    );
+  }, []);
 
+  const products = useSelector((state) => state.productReducer.products);
+
+  console.log(products);
   const handleAddToCart = () => {
     dispatch(allActions.cartActions.addToCart(product));
+  };
+
+  const renderProducts = () => {
+    return products.map((product, index) => {
+      return (
+        <SwiperSlide key={product._id}>
+          <div className="row mx-2 mb-2" key={product._id}>
+            <ProductCard
+              productId={product._id}
+              productName={product.name}
+              price={0}
+              description={'This is a basic product '}
+              imgUrl={'http://localhost:8080/public/' + product.pics[0]}
+            />
+          </div>
+        </SwiperSlide>
+      );
+    });
   };
 
   return (
@@ -150,7 +178,7 @@ export default function Home() {
           // install Swiper modules
           modules={[Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
           spaceBetween={1}
-          slidesPerView={3}
+          slidesPerView={1}
           autoplay
           effect="fade"
           pagination={{
@@ -160,51 +188,47 @@ export default function Home() {
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log('slide change')}
         >
-          <SwiperSlide>
-            <div className="row">
-              <ProductCard
-                productId={1234}
-                productName={'coffee machine nespresso'}
-                price={0}
-                description={'This is a basic product '}
-              />
-              <ProductCard
-                productId={1234}
-                productName={'coffee machine nespresso'}
-                price={0}
-                description={'This is a basic product '}
-              />
-              <ProductCard
-                productId={1234}
-                productName={'coffee machine nespresso'}
-                price={0}
-                description={'This is a basic product '}
-              />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="row">
-              <ProductCard
-                productId={1234}
-                productName={'coffee machine nespresso'}
-                price={0}
-                description={'This is a basic product '}
-              />
-              <ProductCard
-                productId={1234}
-                productName={'coffee machine nespresso'}
-                price={0}
-                description={'This is a basic product '}
-              />
-              <ProductCard
-                productId={1234}
-                productName={'coffee machine nespresso'}
-                price={0}
-                description={'This is a basic product '}
-              />
-            </div>
-          </SwiperSlide>
+          {renderProducts()}
         </Swiper>
+        <Carousel>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="holder.js/800x400?text=First slide&bg=373940"
+              alt="First slide"
+            />
+            <Carousel.Caption>
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="holder.js/800x400?text=Second slide&bg=282c34"
+              alt="Second slide"
+            />
+
+            <Carousel.Caption>
+              <h3>Second slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              className="d-block w-100"
+              src="holder.js/800x400?text=Third slide&bg=20232a"
+              alt="Third slide"
+            />
+
+            <Carousel.Caption>
+              <h3>Third slide label</h3>
+              <p>
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
       </div>
     </div>
   );
