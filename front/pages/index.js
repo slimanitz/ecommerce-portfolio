@@ -145,9 +145,6 @@ export default function Home() {
       </div>
       <div className="row">
         <p className={`${styles.deal} text-center`}>Deals of the day</p>
-        <button className="btn btn-primary" onClick={handleAddToCart}>
-          Add to cart
-        </button>
         <Swiper
           key={2}
           // install Swiper modules
