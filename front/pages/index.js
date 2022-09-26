@@ -14,18 +14,37 @@ import { useEffect } from 'react';
 import API from '../axios';
 import { Carousel } from 'react-bootstrap';
 
-export default function Home() {
+import MultiCarousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await API.get('/products');
+  const products = await res.data;
+
+  return { props: { products } };
+}
+
+export default function Home({ products }) {
   const dispatch = useDispatch();
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      slidesToSlide: 3, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
 
-  useEffect(() => {
-    API.get('/products').then((response) =>
-      dispatch(allActions.productActions.getProducts(response.data))
-    );
-  }, []);
-
-  const products = useSelector((state) => state.productReducer.products);
-
-  console.log(products);
   const handleAddToCart = () => {
     dispatch(allActions.cartActions.addToCart(product));
   };
@@ -33,17 +52,12 @@ export default function Home() {
   const renderProducts = () => {
     return products.map((product, index) => {
       return (
-        <SwiperSlide key={product._id}>
-          <div className="row mx-2 mb-2" key={product._id}>
-            <ProductCard
-              productId={product._id}
-              productName={product.name}
-              price={0}
-              description={'This is a basic product '}
-              imgUrl={'http://localhost:8080/public/' + product.pics[0]}
-            />
-          </div>
-        </SwiperSlide>
+        <ProductCard
+          key={index}
+          price={product.price['$numberDecimal']}
+          name={product.name}
+          imgUrl={'http://localhost:8080/public/' + product.pics[0]}
+        ></ProductCard>
       );
     });
   };
@@ -51,45 +65,11 @@ export default function Home() {
   return (
     <div className="container-fluid ">
       <div className="row">
-        <Swiper
-          key={1}
-          // install Swiper modules
-          modules={[Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
-          spaceBetween={50}
-          slidesPerView={1}
-          autoplay
-          effect="fade"
-          pagination={{
-            clickable: true,
-            type: 'bullets',
-          }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
-        >
-          <SwiperSlide>
-            <div className={`${styles.carouselBg}  h-100 row mb-3`}>
-              <img
-                src={
-                  'https://www.transparentpng.com/thumb/coffee/bEnole-coffee-heart-free-png.png'
-                }
-                alt=""
-                className={`${styles.carouselImage}`}
-              />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={`${styles.carouselBg}  h-100 row mb-3`}>
-              <img
-                src={
-                  'https://www.transparentpng.com/thumb/coffee/v6EtCB-coffee-transparent-background.png'
-                }
-                alt=""
-                className={`${styles.carouselImage}`}
-              />
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className={`${styles.carouselBg}  h-100 row mb-3`}>
+        <Carousel>
+          <Carousel.Item>
+            <div
+              className={`${styles.carouselBg} d-block w-100 h-100 row mb-3 text-center`}
+            >
               <img
                 src={
                   'https://www.transparentpng.com/thumb/coffee/TgK6AC-coffee-transparent-image.png'
@@ -98,8 +78,50 @@ export default function Home() {
                 className={`${styles.carouselImage}`}
               />
             </div>
-          </SwiperSlide>
-        </Swiper>
+
+            <Carousel.Caption>
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <div
+              className={`${styles.carouselBg} d-block w-100 h-100 row mb-3 text-center`}
+            >
+              <img
+                src={
+                  'https://www.transparentpng.com/thumb/coffee/bEnole-coffee-heart-free-png.png'
+                }
+                alt=""
+                className={`${styles.carouselImage}`}
+              />
+            </div>
+            <Carousel.Caption>
+              <h3>Second slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <div
+              className={`${styles.carouselBg}  d-block w-100 h-100 row mb-3 text-center`}
+            >
+              <img
+                src={
+                  'https://www.transparentpng.com/thumb/coffee/v6EtCB-coffee-transparent-background.png'
+                }
+                alt=""
+                className={`${styles.carouselImage}`}
+              />
+            </div>
+
+            <Carousel.Caption>
+              <h3>Third slide label</h3>
+              <p>
+                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
       </div>
       <div className="row text-center mt-5">
         <p className={styles.title}>Welcome to ICOFFEE</p>
@@ -173,62 +195,25 @@ export default function Home() {
       </div>
       <div className="row">
         <p className={`${styles.deal} text-center`}>Deals of the day</p>
-        <Swiper
-          key={2}
-          // install Swiper modules
-          modules={[Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
-          spaceBetween={1}
-          slidesPerView={1}
-          autoplay
-          effect="fade"
-          pagination={{
-            clickable: true,
-            type: 'bullets',
-          }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
+        <MultiCarousel
+          swipeable={false}
+          draggable={false}
+          showDots={true}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          infinite={true}
+          autoPlaySpeed={1000}
+          keyBoardControl={true}
+          customTransition="all .5"
+          transitionDuration={500}
+          containerClass="carousel-container"
+          removeArrowOnDeviceType={['tablet', 'mobile']}
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
         >
           {renderProducts()}
-        </Swiper>
-        <Carousel>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="holder.js/800x400?text=First slide&bg=373940"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="holder.js/800x400?text=Second slide&bg=282c34"
-              alt="Second slide"
-            />
-
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="holder.js/800x400?text=Third slide&bg=20232a"
-              alt="Third slide"
-            />
-
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
+        </MultiCarousel>
+        ;
       </div>
     </div>
   );
