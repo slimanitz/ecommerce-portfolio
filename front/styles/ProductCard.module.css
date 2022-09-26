@@ -4,6 +4,7 @@
     -webkit-transition: box-shadow .6s ease-out;
     box-shadow: .8px .9px 3px grey;
     margin-left: 15px;
+    border: solid 2px #6f4e37;
 
 }
 

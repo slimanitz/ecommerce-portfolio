@@ -31,7 +31,7 @@ function RouteGuard({ children }) {
 
   function authCheck(url) {
     // redirect to login page if accessing a private page and not logged in
-    const publicPaths = ['/login', '/'];
+    const publicPaths = ['/login', '/', '/cart'];
     const path = url.split('?')[0];
     if (!userReducer.token && !publicPaths.includes(path)) {
       setAuthorized(false);

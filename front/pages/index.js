@@ -1,16 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Pagination, Scrollbar, A11y, EffectFade, Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import 'swiper/css/effect-fade';
+
 import styles from '../styles/Index.module.css';
 import allActions from '../redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ProductCard from '../components/ProductCard';
-import { useEffect } from 'react';
 import API from '../axios';
 import { Carousel } from 'react-bootstrap';
 
@@ -54,6 +47,7 @@ export default function Home({ products }) {
       return (
         <ProductCard
           key={index}
+          _id={product._id}
           price={product.price['$numberDecimal']}
           name={product.name}
           imgUrl={'http://localhost:8080/public/' + product.pics[0]}

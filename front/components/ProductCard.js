@@ -4,7 +4,7 @@ import allActions from '../redux/actions';
 import styles from '../styles/ProductCard.module.css';
 
 export default function ProductCard({
-  productId,
+  _id,
   productName,
   price,
   description,
@@ -30,13 +30,13 @@ export default function ProductCard({
         <div className="row">
           <button
             className="btn btn-primary col-sm mr-2"
-            onClick={() => handleAddToCart(productId)}
+            onClick={() => handleAddToCart(_id)}
           >
             Ajouter au panier
           </button>
           <button
             className="btn btn-outline-primary col-sm ml-2"
-            onClick={() => handleBuyNow(productId)}
+            onClick={() => handleBuyNow(_id)}
           >
             Acheter maintenant
           </button>
