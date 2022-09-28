@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import styles from '../styles/Navbar.module.css';
 import Nav from 'react-bootstrap/Nav';
+import { useRouter } from 'next/router';
 
 export default function Navbar() {
   const cart = useSelector((state) => state.cartReducer.cart);
   const userReducer = useSelector((state) => state.userReducer);
+  const router = useRouter();
 
   return (
     <div className="container-fluid">
@@ -42,7 +44,11 @@ export default function Navbar() {
           </div>
 
           <div className="cart col-sm   text-center">
-            <button type="button" className={`btn  my-5 ${styles.cart} p-3`}>
+            <button
+              type="button"
+              onClick={() => router.push('/cart')}
+              className={`btn  my-5 ${styles.cart} p-3`}
+            >
               <img src="/cart.svg" height={30} width={30} alt=""></img>
               <span className="badge badge-light">{cart.length}</span>
             </button>

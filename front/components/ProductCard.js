@@ -22,7 +22,11 @@ export default function ProductCard({
   };
   return (
     <div className={`card  col-sm p-3 ${styles.card} h-100`}>
-      <img className={` ${styles.image}}`} src={imgUrl} alt="Card image cap" />
+      <img
+        className={` ${styles.image}} card-img-top`}
+        src={imgUrl}
+        alt="Card image cap"
+      />
       <div className="card-body">
         <h5 className="card-title">{productName}</h5>
         <p className="card-text">{description}</p>

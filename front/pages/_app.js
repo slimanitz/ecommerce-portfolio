@@ -1,11 +1,12 @@
-import '../styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import { wrapper, store } from '../redux/store'
-import Layout from '../components/Layout'
-import Head from 'next/head'
-import { Provider } from 'react-redux'
-import { RouteGuard } from '../components/RouteGuard'
+import '../styles/globals.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { wrapper, store } from '../redux/store';
+import Layout from '../components/Layout';
+import Head from 'next/head';
+import { Provider } from 'react-redux';
+import { RouteGuard } from '../components/RouteGuard';
+import 'react-multi-carousel/lib/styles.css';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -19,7 +20,7 @@ function MyApp({ Component, pageProps }) {
         </RouteGuard>
       </Layout>
     </Provider>
-  )
+  );
 }
 
-export default wrapper.withRedux(MyApp)
+export default wrapper.withRedux(MyApp);

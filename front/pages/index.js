@@ -5,55 +5,55 @@ import allActions from '../redux/actions';
 import { useDispatch } from 'react-redux';
 import ProductCard from '../components/ProductCard';
 import API from '../axios';
-import { Carousel } from 'react-bootstrap';
+import { Card, Carousel, Stack } from 'react-bootstrap';
+import { isMobile } from 'react-device-detect';
 
 import MultiCarousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await API.get('/products');
-  const products = await res.data;
 
-  return { props: { products } };
+  const res = await API.get('/products');
+
+  return { props: { products: res.data } };
 }
 
 export default function Home({ products }) {
   const dispatch = useDispatch();
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-      slidesToSlide: 3, // optional, default to 1.
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 2, // optional, default to 1.
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1, // optional, default to 1.
-    },
-  };
+  dispatch(allActions.productActions.getProducts(products));
 
   const handleAddToCart = () => {
     dispatch(allActions.cartActions.addToCart(product));
   };
 
   const renderProducts = () => {
-    return products.map((product, index) => {
-      return (
-        <ProductCard
-          key={index}
-          _id={product._id}
-          price={product.price['$numberDecimal']}
-          name={product.name}
-          imgUrl={'http://localhost:8080/public/' + product.pics[0]}
-        ></ProductCard>
-      );
-    });
+    const chunkSize = isMobile ? 1 : 3;
+    const listOfChunks = [];
+    for (let i = 0; i < products.length; i += chunkSize) {
+      listOfChunks.push(products.slice(i, i + chunkSize));
+    }
+    for (let i = 0; i < products.length; i += chunkSize) {
+      listOfChunks.push(products.slice(i, i + chunkSize));
+    }
+    return listOfChunks.map((chunk, index) => (
+      <Carousel.Item key={index}>
+        <Stack
+          direction="horizontal"
+          className="h-100 justify-content-center align-items-center"
+          gap={3}
+        >
+          {chunk.map((product, index) => (
+            <ProductCard
+              key={index}
+              _id={product._id}
+              price={product.price['$numberDecimal']}
+              name={product.name}
+              imgUrl={'http://localhost:8080/public/' + product.pics[0]}
+            ></ProductCard>
+          ))}
+        </Stack>
+      </Carousel.Item>
+    ));
   };
 
   return (
@@ -189,25 +189,8 @@ export default function Home({ products }) {
       </div>
       <div className="row">
         <p className={`${styles.deal} text-center`}>Deals of the day</p>
-        <MultiCarousel
-          swipeable={false}
-          draggable={false}
-          showDots={true}
-          responsive={responsive}
-          ssr={true} // means to render carousel on server-side.
-          infinite={true}
-          autoPlaySpeed={1000}
-          keyBoardControl={true}
-          customTransition="all .5"
-          transitionDuration={500}
-          containerClass="carousel-container"
-          removeArrowOnDeviceType={['tablet', 'mobile']}
-          dotListClass="custom-dot-list-style"
-          itemClass="carousel-item-padding-40-px"
-        >
-          {renderProducts()}
-        </MultiCarousel>
-        ;
+
+        <Carousel>{renderProducts()}</Carousel>
       </div>
     </div>
   );
