@@ -7,7 +7,7 @@ const {
 
 const multiUpload = multer({
   storage,
-  limits: { fileSize: 1 * 1024 * 1024 }, // 1MB
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
 });
 
 const router = express.Router();
