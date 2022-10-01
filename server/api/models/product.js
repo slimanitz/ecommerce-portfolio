@@ -5,7 +5,7 @@ const mongoClient = require('../../config/database');
 const productSchema = new mongoose.Schema(
   {
     name: { type: String },
-    category: { type: String },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
     quantity: { type: Number },
     price: { type: mongoose.Schema.Types.Decimal128 },
     pics: [{ type: String }],
@@ -14,6 +14,6 @@ const productSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const Product = mongoose.model('products', productSchema);
+const Product = mongoose.model('product', productSchema);
 
 module.exports = Product;
