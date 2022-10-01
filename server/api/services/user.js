@@ -10,7 +10,6 @@ const { jwtSecret } = require('../../config/vars');
 const schema = Joi.object({
   fullName: Joi.string().required(),
   email: Joi.string().required(),
-  orders: Joi.array(),
   password: Joi.string().required(),
 });
 
