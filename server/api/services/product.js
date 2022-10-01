@@ -32,7 +32,7 @@ const get = async (id) => {
 };
 
 const getAll = async () => {
-  const products = await Product.find();
+  const products = await Product.find().populate('category', 'name');
   return products;
 };
 
