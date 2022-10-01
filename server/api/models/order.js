@@ -7,6 +7,7 @@ const orderSchema = new mongoose.Schema(
     date: { type: Date, default: Date.now },
     totalPrice: { type: mongoose.Decimal128 },
     orderContent: { type: String },
+    customerId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
 
   },
   { timestamps: true },

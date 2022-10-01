@@ -7,6 +7,7 @@ const schema = Joi.object({
   date: Joi.date(),
   totalPrice: Joi.number().required(),
   orderContent: Joi.string().required(),
+  customerId: Joi.string().required(),
 
 });
 
