@@ -1,5 +1,6 @@
 /server/node_modules
 /server/.env
 /front/.env
+/front/node_modules
 /data
 /server/uploads/
