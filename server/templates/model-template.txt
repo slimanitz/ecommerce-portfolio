@@ -9,6 +9,6 @@ __FIELDS__
   { timestamps: true },
 );
 
-const __MODEL__ = mongoose.model('__ENTITY__s', __ENTITY__Schema);
+const __MODEL__ = mongoose.model('__ENTITY__', __ENTITY__Schema);
 
 module.exports = __MODEL__;
