@@ -1,9 +1,9 @@
-import { useRouter, withRouter } from 'next/router';
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import API from '../axios';
-import allActions from '../redux/actions';
+import { useRouter, withRouter } from "next/router";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import API from "../axios";
+import allActions from "../redux/actions";
 
 function Login(props) {
   const {
@@ -16,7 +16,7 @@ function Login(props) {
 
   const dispatch = useDispatch();
   const onSubmit = async ({ email, password }) => {
-    const response = await API.post('/users/login', { email, password });
+    const response = await API.post("/users/login", { email, password });
     if (response.status === 200) {
       dispatch(
         allActions.userActions.login({
@@ -24,9 +24,8 @@ function Login(props) {
           token: response.data.token,
         })
       );
-      console.log(props.router);
-      router.push(props.router.query.redirect || 'logged');
-    } else router.push('/login');
+      router.push(props.router.query.redirect || "logged");
+    } else router.push("/login");
   };
 
   return (
@@ -43,7 +42,7 @@ function Login(props) {
             <input
               type="email"
               className="form-control"
-              {...register('email', {
+              {...register("email", {
                 required: true,
               })}
             />
@@ -54,11 +53,11 @@ function Login(props) {
           <div className="col-sm-10">
             {errors.password && <span>This field is required</span>}
             <input
-              type={'password'}
+              type={"password"}
               className="form-control"
-              {...register('password', {
+              {...register("password", {
                 required: true,
-                type: 'password',
+                type: "password",
               })}
             />
           </div>

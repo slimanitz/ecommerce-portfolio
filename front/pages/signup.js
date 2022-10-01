@@ -1,30 +1,32 @@
-import { NextResponse } from 'next/server'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import API from '../axios'
-import allActions from '../redux/actions'
+import { NextResponse } from "next/server";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import API from "../axios";
+import allActions from "../redux/actions";
 
 export default function Signup() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const dispatch = useDispatch()
+  const router = useRouter();
+
+  const dispatch = useDispatch();
   const onSubmit = async ({ email, password }) => {
-    const response = await API.post('/users/login', { email, password })
+    const response = await API.post("/users/login", { email, password });
     if (response.status === 200)
       dispatch(
         allActions.userActions.login({
           user: response.data.user,
           token: response.data.token,
         }),
-        NextResponse.redirect('/logged'),
-      )
-    else NextResponse.redirect('/login')
-  }
+        router.push("/logged")
+      );
+    else router.push("/login");
+  };
 
   return (
     <div className="row">
@@ -40,7 +42,7 @@ export default function Signup() {
             <input
               type="email"
               className="form-control"
-              {...register('email', {
+              {...register("email", {
                 required: true,
               })}
             />
@@ -51,11 +53,11 @@ export default function Signup() {
           <div className="col-sm-10">
             {errors.password && <span>This field is required</span>}
             <input
-              type={'password'}
+              type={"password"}
               className="form-control"
-              {...register('password', {
+              {...register("password", {
                 required: true,
-                type: 'password',
+                type: "password",
               })}
             />
           </div>
@@ -67,5 +69,5 @@ export default function Signup() {
         </div>
       </form>
     </div>
-  )
+  );
 }

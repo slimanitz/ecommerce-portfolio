@@ -1,16 +1,17 @@
 const currentUser = (state = {}, action) => {
   switch (action.type) {
-    case 'LOGIN':
+    case "LOGIN":
       return {
         ...state,
         user: action.payload.user,
-        loggedIn: true,
         token: action.payload.token,
+        loggedIn: true,
       };
-    case 'LOG_OUT':
+    case "LOG_OUT":
       return {
         ...state,
         user: {},
+        token: {},
         loggedIn: false,
       };
 

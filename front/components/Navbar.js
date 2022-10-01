@@ -23,10 +23,10 @@ export default function Navbar() {
         <div className="row">
           <div className="col-sm justify-content-center">
             <div className="input-group  my-5  w-50  mx-auto">
-              {userReducer.user ? (
+              {userReducer.loggedIn ? (
                 <div className="row">
                   <div className=" col- mx-auto">
-                    <p>Hello {userReducer.user?.fullName}</p>
+                    <p>Hello {userReducer.user.fullName}</p>
                   </div>
                   <div className="col- mx-auto">
                     <button className="btn btn-danger" onClick={disconnect}>
@@ -39,7 +39,10 @@ export default function Navbar() {
                   <button
                     className="btn btn-primary"
                     onClick={() =>
-                      router.push("/login", { query: { redirect: "/" } })
+                      router.push({
+                        pathname: "/login",
+                        query: { redirect: "/" },
+                      })
                     }
                   >
                     Se connecter
