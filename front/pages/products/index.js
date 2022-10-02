@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import API from "../../axios";
 import ProductCard from "../../components/ProductCard";
 import styles from "../../styles/Products.module.css";
@@ -12,6 +13,7 @@ export async function getServerSideProps() {
 }
 
 function Index({ products, categories }) {
+  const router = useRouter();
   const renderCategories = () => {
     return categories.map(({ _id, name }) => (
       <div key={_id} className="row">

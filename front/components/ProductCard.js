@@ -5,14 +5,7 @@ import { useDispatch } from "react-redux";
 import allActions from "../redux/actions";
 import styles from "../styles/ProductCard.module.css";
 
-export default function ProductCard({
-  className,
-  _id,
-  name,
-  price,
-  description,
-  imgUrl,
-}) {
+export default function ProductCard({ className, _id, name, price, imgUrl }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [show, setShow] = useState(false);
@@ -26,7 +19,10 @@ export default function ProductCard({
     router.push("/cart");
   };
   return (
-    <div className={`card   p-3 ${styles.card} h-100 ${className}`}>
+    <div
+      className={`card   p-3 ${styles.card} h-100 ${className}`}
+      onClick={() => router.push("/products/" + _id)}
+    >
       <img
         className={` ${styles.image}} card-img-top`}
         src={imgUrl}

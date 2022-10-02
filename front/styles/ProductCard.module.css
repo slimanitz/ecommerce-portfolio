@@ -6,6 +6,7 @@
   margin-left: 15px;
   border: solid 2px #6f4e37;
   width: 18rem;
+  cursor: pointer;
 }
 
 .card:hover {
