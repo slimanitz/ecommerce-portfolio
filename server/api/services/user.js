@@ -52,7 +52,7 @@ const signup = async (user) => {
       status: httpStatus.BAD_REQUEST,
     });
   }
-  if (await User.findOne({ email: user.email })) throw new APIError({ message: `User with the following ${user.email} already exists`, status: httpStatus.CONFLICT });
+  if (await User.findOne({ email: user.email })) throw new APIError({ message: `User with the following email ${user.email} already exists`, status: httpStatus.UNAUTHORIZED });
   value.password = hashPassword(user.password);
   const newUser = new User(value);
   await newUser.save();
@@ -101,7 +101,7 @@ const login = async (payload) => {
   if (!bcrypt.compareSync(payload.password, user.password)) {
     throw new APIError({
       message: 'Wrong credentials',
-      status: httpStatus.BAD_REQUEST,
+      status: httpStatus.UNAUTHORIZED,
     });
   }
   return { user, token: generateToken({ id: user._id }) };
