@@ -1,0 +1,9 @@
+.errorMessage {
+  color: red;
+  font-size: 16px;
+}
+
+.errorMessageBg {
+  border: 2px solid red;
+  background-color: #ff7276;
+}
