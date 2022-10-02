@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter, withRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -32,11 +33,11 @@ function Login(props) {
     <div className="row">
       <form
         align="center"
-        className="col-4 mx-auto pt-5"
+        className="col-lg-4 col-sm-10 mx-auto pt-5"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="form-group row mt-2 ">
-          <label className="col-sm-2 col-form-label">Email</label>
+          <p className="col-sm-2 col-form-label">Email</p>
           <div className="col-sm-10">
             {errors.email && <span>This field is required</span>}
             <input
@@ -49,7 +50,7 @@ function Login(props) {
           </div>
         </div>
         <div className="form-group row mt-2">
-          <label className="col-sm-2 col-form-label">Password</label>
+          <p className="col-sm-2 col-form-label">Password</p>
           <div className="col-sm-10">
             {errors.password && <span>This field is required</span>}
             <input
@@ -66,6 +67,9 @@ function Login(props) {
           <button className="btn btn-primary" type="submit">
             Login
           </button>
+        </div>
+        <div className="row mx-auto">
+          <Link href="/signup">Create an account</Link>
         </div>
       </form>
     </div>
