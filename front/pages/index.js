@@ -38,6 +38,7 @@ export default function Home({ products }) {
         >
           {chunk.map((product, index) => (
             <ProductCard
+              className="col-sm"
               key={index}
               _id={product._id}
               price={product.price["$numberDecimal"]}
