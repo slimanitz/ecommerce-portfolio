@@ -83,11 +83,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item mx-lg-4">
-              <Link href="/product">
+              <Link href="/products">
                 <Nav.Link
                   as={"a"}
                   className={`nav-link ${styles.customLink}`}
-                  href="/product"
+                  href="/products"
                 >
                   Product
                 </Nav.Link>
