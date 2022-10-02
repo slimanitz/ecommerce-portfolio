@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import API from "../axios";
-import allActions from "../redux/actions";
+import styles from "../styles/Forms.module.css";
 
 export default function Signup() {
   const {
@@ -14,30 +14,55 @@ export default function Signup() {
 
   const router = useRouter();
 
-  const dispatch = useDispatch();
-  const onSubmit = async ({ email, password }) => {
-    const response = await API.post("/users/login", { email, password });
-    if (response.status === 200)
-      dispatch(
-        allActions.userActions.login({
-          user: response.data.user,
-          token: response.data.token,
-        }),
-        router.push("/logged")
-      );
-    else router.push("/login");
+  const onSubmit = async ({ fullName, email, password }) => {
+    try {
+      const response = await API.post("/users/signup", {
+        fullName,
+        email,
+        password,
+      });
+      if (response.status === 200) router.push("/login");
+    } catch (err) {
+      console.log("here");
+      if (err.response.status === 401) {
+        router.push({
+          pathname: "/signup",
+          query: { errorMessage: err.response.data.message },
+        });
+      }
+    }
   };
 
   return (
     <div className="row">
       <form
         align="center"
-        className="col-4 mx-auto pt-5"
+        className="col-lg-4 col-sm-10 mx-auto pt-5"
         onSubmit={handleSubmit(onSubmit)}
       >
+        {router.query.errorMessage && (
+          <div className={` row ${styles.errorMessageBg}`}>
+            <p className={`text-center ${styles.errorMessage} my-auto`}>
+              {router.query.errorMessage}
+            </p>
+          </div>
+        )}
         <div className="form-group row mt-2 ">
-          <label className="col-sm-2 col-form-label">Email</label>
-          <div className="col-sm-10">
+          <p className="col-sm-3  text-left ">Full name</p>
+          <div className="col-sm-9">
+            {errors.fullName && <span>This field is required</span>}
+            <input
+              type="text"
+              className="form-control"
+              {...register("fullName", {
+                required: true,
+              })}
+            />
+          </div>
+        </div>
+        <div className="form-group row mt-2 ">
+          <p className="col-sm-3 col-form-label">Email</p>
+          <div className="col-sm-9">
             {errors.email && <span>This field is required</span>}
             <input
               type="email"
@@ -49,8 +74,8 @@ export default function Signup() {
           </div>
         </div>
         <div className="form-group row mt-2">
-          <label className="col-sm-2 col-form-label">Password</label>
-          <div className="col-sm-10">
+          <p className="col-sm-3 col-form-label">Password</p>
+          <div className="col-sm-9">
             {errors.password && <span>This field is required</span>}
             <input
               type={"password"}
@@ -64,8 +89,11 @@ export default function Signup() {
         </div>
         <div className="form-group row mt-2">
           <button className="btn btn-primary" type="submit">
-            Login
+            Sign up
           </button>
+        </div>
+        <div className="row mx-auto">
+          <Link href="/login">Login</Link>
         </div>
       </form>
     </div>
