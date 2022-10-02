@@ -32,7 +32,7 @@ const get = async (id) => {
 };
 
 const getAll = async ({ skip = 0, limit = 0 }) => {
-  const products = await Product.find().limit(limit).populate('category', 'name');
+  const products = await Product.find().limit(limit).skip(skip).populate('category', 'name');
   return products;
 };
 
