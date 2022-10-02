@@ -6,8 +6,9 @@ import allActions from "../redux/actions";
 import styles from "../styles/ProductCard.module.css";
 
 export default function ProductCard({
+  className,
   _id,
-  productName,
+  name,
   price,
   description,
   imgUrl,
@@ -25,16 +26,19 @@ export default function ProductCard({
     router.push("/cart");
   };
   return (
-    <div className={`card  col-sm p-3 ${styles.card} h-100`}>
+    <div className={`card   p-3 ${styles.card} h-100 ${className}`}>
       <img
         className={` ${styles.image}} card-img-top`}
         src={imgUrl}
         alt="Card image cap"
       />
-      <div className="card-body">
-        <h5 className="card-title">{productName}</h5>
-        <p className="card-text">{description}</p>
-        <div className="row">Price: {price}</div>
+      <div className="p-2">
+        <div className="row">
+          <p className="">{name}</p>
+        </div>
+        <div className="row">
+          <p className="">Price: {price}</p>
+        </div>
         <div className="row">
           <button
             className="btn btn-primary col-sm mr-2"
