@@ -7,7 +7,7 @@ const create = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-  const products = await productService.getAll();
+  const products = await productService.getAll(req.query);
   res.status(httpStatus.OK).json(products);
 };
 

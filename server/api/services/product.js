@@ -31,8 +31,8 @@ const get = async (id) => {
   return product;
 };
 
-const getAll = async () => {
-  const products = await Product.find().populate('category', 'name');
+const getAll = async ({ skip = 0, limit = 0 }) => {
+  const products = await Product.find().limit(limit).populate('category', 'name');
   return products;
 };
 
