@@ -6,6 +6,6 @@ export default function Cart() {
       state.cartReducer.cart.some((p) => e._id === p._id)
     )
   );
-  console.log(cart);
+  const tmp = useSelector((state) => console.log(state.cartReducer.cart));
   return <div>{JSON.stringify(cart)}</div>;
 }

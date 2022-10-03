@@ -1,15 +1,23 @@
 const currentCart = (state = { cart: [] }, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const index = state.cart.findIndex((e) => e._id === action.payload);
+      const index = state.cart.findIndex(
+        (e) => e._id === action.payload.product
+      );
       return {
         ...state,
         cart:
           index === -1
-            ? [...state.cart, { _id: action.payload, quantity: 1 }]
+            ? [
+                ...state.cart,
+                {
+                  _id: action.payload.product,
+                  quantity: action.payload.quantity,
+                },
+              ]
             : state.cart.map((e) =>
-                e._id === action.payload
-                  ? { ...e, quantity: e.quantity + 1 }
+                e._id === action.payload.product
+                  ? { ...e, quantity: e.quantity + action.payload.quantity }
                   : e
               ),
       };

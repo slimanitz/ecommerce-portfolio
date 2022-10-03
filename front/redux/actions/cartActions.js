@@ -1,8 +1,8 @@
-const addToCart = (product) => {
+const addToCart = (product, quantity = 1) => {
   return {
     type: 'ADD_TO_CART',
-    payload: product,
-  }
-}
+    payload: { product, quantity },
+  };
+};
 
-export default { addToCart }
+export default { addToCart };

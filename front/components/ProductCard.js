@@ -1,9 +1,10 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { Toast } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import allActions from "../redux/actions";
-import styles from "../styles/ProductCard.module.css";
+/* eslint-disable @next/next/no-img-element */
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Toast } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import allActions from '../redux/actions';
+import styles from '../styles/ProductCard.module.css';
 
 export default function ProductCard({ className, _id, name, price, imgUrl }) {
   const dispatch = useDispatch();
@@ -16,21 +17,21 @@ export default function ProductCard({ className, _id, name, price, imgUrl }) {
 
   const handleBuyNow = (productId) => {
     dispatch(allActions.cartActions.addToCart(productId));
-    router.push("/cart");
+    router.push('/cart');
   };
   return (
     <div
       className={`card   p-3 ${styles.card} h-100 ${className}`}
-      onClick={() => router.push("/products/" + _id)}
+      onClick={() => router.push('/products/' + _id)}
     >
       <img
         className={` ${styles.image}} card-img-top`}
         src={imgUrl}
-        alt="Card image cap"
+        alt={name}
       />
       <div className="p-2">
         <div className="row">
-          <p className="">{name}</p>
+          <p className="text-truncate">{name}</p>
         </div>
         <div className="row">
           <p className="">Price: {price}</p>
