@@ -1,0 +1,11 @@
+.title {
+  font-size: x-large;
+  font-weight: 600;
+  color: #6f4e37;
+}
+
+.category {
+  color: #6d513d;
+  font-weight: 400;
+  cursor: pointer;
+}

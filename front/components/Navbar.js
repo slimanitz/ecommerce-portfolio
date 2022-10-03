@@ -5,6 +5,7 @@ import styles from "../styles/Navbar.module.css";
 import Nav from "react-bootstrap/Nav";
 import { useRouter } from "next/router";
 import allActions from "../redux/actions";
+import { isMobile } from "react-device-detect";
 
 export default function Navbar() {
   const cart = useSelector((state) => state.cartReducer.cart);
@@ -35,19 +36,21 @@ export default function Navbar() {
                   </div>
                 </div>
               ) : (
-                <div className="row">
-                  <button
-                    className="btn btn-primary"
-                    onClick={() =>
-                      router.push({
-                        pathname: "/login",
-                        query: { redirect: "/" },
-                      })
-                    }
-                  >
-                    Se connecter
-                  </button>
-                </div>
+                !isMobile && (
+                  <div className="row">
+                    <button
+                      className="btn btn-primary mx-auto"
+                      onClick={() =>
+                        router.push({
+                          pathname: "/login",
+                          query: { redirect: "/" },
+                        })
+                      }
+                    >
+                      Se connecter
+                    </button>
+                  </div>
+                )
               )}
             </div>
           </div>
@@ -80,11 +83,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item mx-lg-4">
-              <Link href="/product">
+              <Link href="/products">
                 <Nav.Link
                   as={"a"}
                   className={`nav-link ${styles.customLink}`}
-                  href="/product"
+                  href="/products"
                 >
                   Product
                 </Nav.Link>
