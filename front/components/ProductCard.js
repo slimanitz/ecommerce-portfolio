@@ -29,24 +29,28 @@ export default function ProductCard({ className, _id, name, price, imgUrl }) {
       />
       <div className="p-2">
         <div className="row">
-          <p className="text-truncate">{name}</p>
+          <p className={`text-truncate ${styles.title}`}>{name}</p>
         </div>
         <div className="row">
-          <p className="">Price: {price}</p>
+          <p className={`${styles.price} `}>{price} €</p>
         </div>
         <div className="row">
-          <button
-            className="btn btn-primary col-sm mr-2"
-            onClick={() => handleAddToCart(_id)}
-          >
-            Ajouter au panier
-          </button>
-          <button
-            className="btn btn-outline-primary col-sm ml-2"
-            onClick={() => handleBuyNow(_id)}
-          >
-            Acheter maintenant
-          </button>
+          <div className="col-lg-6  col-sm-12 mb-1">
+            <button
+              className="btn btn-primary "
+              onClick={() => handleAddToCart(_id)}
+            >
+              Ajouter au panier
+            </button>
+          </div>
+          <div className="col-lg-6 col-sm-12 mb-1">
+            <button
+              className="btn btn-outline-primary  "
+              onClick={() => handleBuyNow(_id)}
+            >
+              Acheter maintenant
+            </button>
+          </div>
         </div>
       </div>
 
