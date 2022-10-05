@@ -22,7 +22,7 @@ export default function ProductCard({ className, _id, name, price, imgUrl }) {
   return (
     <div className={`card   p-3 ${styles.card} h-100 ${className}`}>
       <img
-        className={` ${styles.image}} card-img-top`}
+        className={` ${styles.image}} card-img-top rounded`}
         src={imgUrl}
         alt={name}
         onClick={() => router.push("/products/" + _id)}
