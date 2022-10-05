@@ -1,3 +1,17 @@
 .background {
-    height: 100vh;
+  height: 50vh;
+}
+
+.price {
+  font-family: "Poppins", sans-serif;
+  color: #6f4e37;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.title {
+  font-family: "Poppins", sans-serif;
+  color: #6f4e37;
+  font-size: 50px;
+  font-weight: 600;
 }

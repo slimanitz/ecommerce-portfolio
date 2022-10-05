@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Carousel } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import API from '../../axios';
-import allActions from '../../redux/actions';
-import styles from '../../styles/Product.module.css';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { Carousel } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import API from "../../axios";
+import allActions from "../../redux/actions";
+import styles from "../../styles/Product.module.css";
 
 export async function getServerSideProps(context) {
   // Fetch data from external API
 
-  const product = await API.get('/products/' + context.params.id);
+  const product = await API.get("/products/" + context.params.id);
 
   return { props: { product: product.data } };
 }
 
 function ProductId({ product }) {
   const router = useRouter();
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
   const handleAddQuantity = () => {
@@ -33,7 +33,7 @@ function ProductId({ product }) {
           <div className="row mt-3">
             <div className="row">
               <div className="col-lg-5 col-sm-12 ">
-                <h1>{product.name}</h1>
+                <p className={`${styles.title}`}>{product.name}</p>
               </div>
             </div>
             <div className="row">
@@ -53,7 +53,7 @@ function ProductId({ product }) {
               <div className="col-lg-7 col-sm-12">
                 <div className="row">
                   <p className={`${styles.price}`}>
-                    {product.price['$numberDecimal']}
+                    {product.price["$numberDecimal"] + "€"}
                   </p>
                 </div>
                 <div className="row">
@@ -68,8 +68,9 @@ function ProductId({ product }) {
                   <div className="col-2">
                     <input
                       className="input w-100"
-                      type={'number'}
+                      type={"number"}
                       value={quantity}
+                      max={product.quantity}
                       step={1}
                       onChange={(e) => setQuantity(e.target.value)}
                     />
@@ -86,13 +87,7 @@ function ProductId({ product }) {
               </div>
             </div>
           </div>
-          <div className="col-lg-7 col-sm-12">
-            <div className="row">
-              <p className={`${styles.price}`}>
-                {product.price['$numberDecimal']}
-              </p>
-            </div>
-          </div>
+          <div className="col-lg-7 col-sm-12"></div>
         </div>
         <div className="col-1"></div>
       </div>
