@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Toast } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import allActions from '../redux/actions';
-import styles from '../styles/ProductCard.module.css';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { Toast } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import allActions from "../redux/actions";
+import styles from "../styles/ProductCard.module.css";
 
 export default function ProductCard({ className, _id, name, price, imgUrl }) {
   const dispatch = useDispatch();
@@ -17,17 +17,15 @@ export default function ProductCard({ className, _id, name, price, imgUrl }) {
 
   const handleBuyNow = (productId) => {
     dispatch(allActions.cartActions.addToCart(productId));
-    router.push('/cart');
+    router.push("/cart");
   };
   return (
-    <div
-      className={`card   p-3 ${styles.card} h-100 ${className}`}
-      onClick={() => router.push('/products/' + _id)}
-    >
+    <div className={`card   p-3 ${styles.card} h-100 ${className}`}>
       <img
         className={` ${styles.image}} card-img-top`}
         src={imgUrl}
         alt={name}
+        onClick={() => router.push("/products/" + _id)}
       />
       <div className="p-2">
         <div className="row">
