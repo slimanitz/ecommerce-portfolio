@@ -9,7 +9,6 @@ const schema = Joi.object({
   quantity: Joi.number().required(),
   price: Joi.number().required(),
   pics: Joi.array(),
-
 });
 
 const create = async (body, files) => {
@@ -32,7 +31,10 @@ const get = async (id) => {
 };
 
 const getAll = async ({ skip = 0, limit = 0 }) => {
-  const products = await Product.find().limit(limit).skip(skip).populate('category', 'name');
+  const products = await Product.find()
+    .limit(limit)
+    .skip(skip)
+    .populate('category', 'name');
   return products;
 };
 
@@ -50,10 +52,17 @@ const remove = async (id) => {
   await Product.findByIdAndDelete(id);
 };
 
+const bulkGet = async (productIds) => {
+  console.log(productIds);
+  const products = await Product.find({ _id: { $in: productIds } });
+  return products;
+};
+
 module.exports.productService = {
   create,
   get,
   getAll,
   update,
   remove,
+  bulkGet,
 };

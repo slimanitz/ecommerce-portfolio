@@ -2,7 +2,12 @@ const express = require('express');
 const multer = require('multer');
 const storage = require('../../config/storage');
 const {
-  create, get, getAll, update, remove,
+  create,
+  get,
+  getAll,
+  update,
+  remove,
+  bulkGet,
 } = require('../controllers/product');
 
 const multiUpload = multer({
@@ -13,6 +18,7 @@ const multiUpload = multer({
 const router = express.Router();
 
 router.post('/', multiUpload.array('pics', 10), create);
+router.get('/bulk', bulkGet);
 router.get('/:id', get);
 router.get('/', getAll);
 router.patch('/:id', update);

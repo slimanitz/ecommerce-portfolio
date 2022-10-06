@@ -1,4 +1,5 @@
 const httpStatus = require('http-status');
+const { default: mongoose } = require('mongoose');
 const { productService } = require('../services/product');
 
 const create = async (req, res) => {
@@ -29,10 +30,20 @@ const remove = async (req, res) => {
   res.status(httpStatus.OK).json(product);
 };
 
+const bulkGet = async (req, res) => {
+  const { productIds } = req.query;
+  console.log(productIds);
+  const products = await productService.bulkGet(JSON.parse(productIds)
+    .map(({ _id }) => mongoose.Types.ObjectId(_id)));
+  console.log(products);
+  res.status(httpStatus.OK).json(products);
+};
+
 module.exports = {
   create,
   get,
   getAll,
   update,
   remove,
+  bulkGet,
 };
