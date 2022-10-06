@@ -61,7 +61,7 @@ export default function Navbar() {
           <div className="cart col-sm   text-center">
             <button
               type="button"
-              onClick={() => router.push("/cart")}
+              onClick={() => router.push({ pathname: "/cart" })}
               className={`btn  my-5 ${styles.cart} p-3`}
             >
               <img src="/cart.svg" height={30} width={30} alt=""></img>
