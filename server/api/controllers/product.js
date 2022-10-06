@@ -32,10 +32,8 @@ const remove = async (req, res) => {
 
 const bulkGet = async (req, res) => {
   const { productIds } = req.query;
-  console.log(productIds);
   const products = await productService.bulkGet(JSON.parse(productIds)
     .map(({ _id }) => mongoose.Types.ObjectId(_id)));
-  console.log(products);
   res.status(httpStatus.OK).json(products);
 };
 

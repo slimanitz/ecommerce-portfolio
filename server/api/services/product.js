@@ -53,7 +53,6 @@ const remove = async (id) => {
 };
 
 const bulkGet = async (productIds) => {
-  console.log(productIds);
   const products = await Product.find({ _id: { $in: productIds } });
   return products;
 };
