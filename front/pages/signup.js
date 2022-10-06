@@ -23,7 +23,6 @@ export default function Signup() {
       });
       if (response.status === 200) router.push("/login");
     } catch (err) {
-      console.log("here");
       if (err.response.status === 401) {
         router.push({
           pathname: "/signup",

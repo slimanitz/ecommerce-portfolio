@@ -10,7 +10,6 @@ import "react-multi-carousel/lib/styles.css";
 
 function MyApp({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
-  console.log(store.getState());
   return (
     <Provider store={store}>
       <Head>
