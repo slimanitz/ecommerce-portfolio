@@ -10,13 +10,13 @@ export default function ProductCard({ className, _id, name, price, imgUrl }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [show, setShow] = useState(false);
-  const handleAddToCart = (productId) => {
-    dispatch(allActions.cartActions.addToCart(productId));
+  const handleAddToCart = () => {
+    dispatch(allActions.cartActions.addToCart({ _id, quantity: 1 }));
     setShow(true);
   };
 
-  const handleBuyNow = (productId) => {
-    dispatch(allActions.cartActions.addToCart(productId));
+  const handleBuyNow = () => {
+    dispatch(allActions.cartActions.addToCart({ _id, quantity: 1 }));
     router.push("/cart");
   };
   return (
@@ -38,7 +38,7 @@ export default function ProductCard({ className, _id, name, price, imgUrl }) {
           <div className="col-lg-6  col-sm-12 mb-1">
             <button
               className="btn btn-primary "
-              onClick={() => handleAddToCart(_id)}
+              onClick={() => handleAddToCart()}
             >
               Ajouter au panier
             </button>
@@ -46,7 +46,7 @@ export default function ProductCard({ className, _id, name, price, imgUrl }) {
           <div className="col-lg-6 col-sm-12 mb-1">
             <button
               className="btn btn-outline-primary  "
-              onClick={() => handleBuyNow(_id)}
+              onClick={() => handleBuyNow()}
             >
               Acheter maintenant
             </button>
