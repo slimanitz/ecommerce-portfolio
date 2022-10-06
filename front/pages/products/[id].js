@@ -21,7 +21,7 @@ function ProductId({ product }) {
   const dispatch = useDispatch();
 
   const handleAddQuantity = () => {
-    dispatch(allActions.cartActions.addToCart(product._id, quantity));
+    dispatch(allActions.cartActions.addToCart({ _id, quantity }));
     setQuantity(0);
   };
 
