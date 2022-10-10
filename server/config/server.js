@@ -12,7 +12,6 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 app.use('/public', express.static('./uploads'));
 app.use(express.json());
 app.use('/api', router);
-
 app.use(errorHandler);
 
 module.exports = app;
