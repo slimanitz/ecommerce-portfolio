@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Carousel, Toast, ToastContainer } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import API from '../../axios';
-import allActions from '../../redux/actions';
-import styles from '../../styles/Product.module.css';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { Carousel, Toast, ToastContainer } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import API from "../../axios";
+import allActions from "../../redux/actions";
+import styles from "../../styles/Product.module.css";
 
 export async function getServerSideProps(context) {
   // Fetch data from external API
 
-  const product = await API.get('/products/' + context.params.id);
+  const product = await API.get("/products/" + context.params.id);
 
   return { props: { product: product.data } };
 }
@@ -55,7 +55,7 @@ function ProductId({ product }) {
               <div className="col-lg-7 col-sm-12">
                 <div className="row">
                   <p className={`${styles.price}`}>
-                    {product.price['$numberDecimal'] + '€'}
+                    {product.price["$numberDecimal"] + "€"}
                   </p>
                 </div>
                 <div className="row">
@@ -70,9 +70,9 @@ function ProductId({ product }) {
                   <div className="col-2">
                     <input
                       className="input w-100"
-                      type={'number'}
+                      type={"number"}
                       value={quantity}
-                      max={product.quantity}
+                      max={product.availableQuantity}
                       step={1}
                       onChange={(e) => setQuantity(e.target.value)}
                     />
@@ -94,7 +94,7 @@ function ProductId({ product }) {
         <div className="col-1"></div>
       </div>
       {show && (
-        <ToastContainer className="p-3" position={'bottom-end'}>
+        <ToastContainer className="p-3" position={"bottom-end"}>
           <Toast
             onClose={() => setShow(false)}
             animation={true}
