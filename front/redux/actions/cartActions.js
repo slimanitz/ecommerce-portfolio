@@ -1,7 +1,7 @@
-const addToCart = ({ _id, quantity = 1 }) => {
+const addToCart = (product) => {
   return {
     type: "ADD_TO_CART",
-    payload: { _id, quantity },
+    payload: product,
   };
 };
 
