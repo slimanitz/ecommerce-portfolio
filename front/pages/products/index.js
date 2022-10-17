@@ -1,13 +1,11 @@
-import { useRouter } from 'next/router';
-import API from '../../axios';
-import ProductCard from '../../components/ProductCard';
-import styles from '../../styles/Products.module.css';
+import { useRouter } from "next/router";
+import API from "../../axios";
+import ProductCard from "../../components/ProductCard";
+import styles from "../../styles/Products.module.css";
 
 export async function getServerSideProps() {
-  // Fetch data from external API
-
-  const products = await API.get('/products');
-  const categories = await API.get('/categories');
+  const products = await API.get("/products");
+  const categories = await API.get("/categories");
 
   return { props: { products: products.data, categories: categories.data } };
 }
@@ -24,12 +22,7 @@ function Index({ products, categories }) {
   const renderProducts = () => {
     return products.map((product) => (
       <div className="col-4 mt-3" key={product._id}>
-        <ProductCard
-          _id={product._id}
-          price={product.price['$numberDecimal']}
-          name={product.name}
-          imgUrl={'http://localhost:8080/public/' + product.pics[0]}
-        />
+        <ProductCard product={product} />
       </div>
     ));
   };

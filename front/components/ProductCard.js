@@ -1,38 +1,40 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Toast } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import allActions from '../redux/actions';
-import styles from '../styles/ProductCard.module.css';
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { Toast } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import allActions from "../redux/actions";
+import styles from "../styles/ProductCard.module.css";
 
-export default function ProductCard({ className, _id, name, price, imgUrl }) {
+export default function ProductCard({ className, product }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [show, setShow] = useState(false);
   const handleAddToCart = () => {
-    dispatch(allActions.cartActions.addToCart({ _id, quantity: 1 }));
+    dispatch(allActions.cartActions.addToCart({ ...product, quantity: 1 }));
     setShow(true);
   };
 
   const handleBuyNow = () => {
-    dispatch(allActions.cartActions.addToCart({ _id, quantity: 1 }));
-    router.push('/cart');
+    dispatch(allActions.cartActions.addToCart({ ...product, quantity: 1 }));
+    router.push("/cart");
   };
   return (
     <div className={`rounded p-3 ${styles.card} h-100 ${className}`}>
       <img
         className={` ${styles.image}} card-img-top rounded`}
-        src={imgUrl}
-        alt={name}
-        onClick={() => router.push('/products/' + _id)}
+        src={`http://localhost:8080/public/${product.pics[0]}`}
+        alt={product.name}
+        onClick={() => router.push("/products/" + product._id)}
       />
       <div className="p-2">
         <div className="row">
-          <p className={`text-truncate ${styles.title}`}>{name}</p>
+          <p className={`text-truncate ${styles.title}`}>{product.name}</p>
         </div>
         <div className="row">
-          <p className={`${styles.price} `}>{price} €</p>
+          <p className={`${styles.price} `}>
+            {product.price["$numberDecimal"]} €
+          </p>
         </div>
         <div className="row">
           <div className="col-lg-6  col-sm-12 mb-1">

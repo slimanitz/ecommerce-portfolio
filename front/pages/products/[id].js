@@ -22,7 +22,7 @@ function ProductId({ product }) {
   const [show, setShow] = useState(false);
 
   const handleAddQuantity = () => {
-    dispatch(allActions.cartActions.addToCart({ _id: product._id, quantity }));
+    dispatch(allActions.cartActions.addToCart({ ...product, quantity }));
     setShow(true);
     setQuantity(0);
   };
