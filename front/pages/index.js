@@ -1,19 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 
-import styles from "../styles/Index.module.css";
-import allActions from "../redux/actions";
-import { useDispatch } from "react-redux";
-import ProductCard from "../components/ProductCard";
-import API from "../axios";
-import { Carousel, Stack } from "react-bootstrap";
-import { isMobile } from "react-device-detect";
+import styles from '../styles/Index.module.css';
+import allActions from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import ProductCard from '../components/ProductCard';
+import API from '../axios';
+import { Carousel, Stack } from 'react-bootstrap';
+import { isMobile } from 'react-device-detect';
 
-import MultiCarousel from "react-multi-carousel";
+import MultiCarousel from 'react-multi-carousel';
 
 export async function getServerSideProps() {
   // Fetch data from external API
 
-  const res = await API.get("/products", { params: { limit: 3 } });
+  const res = await API.get('/products', { params: { limit: 3 } });
 
   return { props: { products: res.data } };
 }
@@ -41,9 +41,9 @@ export default function Home({ products }) {
               className="col-sm"
               key={index}
               _id={product._id}
-              price={product.price["$numberDecimal"]}
+              price={product.price['$numberDecimal']}
               name={product.name}
-              imgUrl={"http://localhost:8080/public/" + product.pics[0]}
+              imgUrl={'http://localhost:8080/public/' + product.pics[0]}
             ></ProductCard>
           ))}
         </Stack>
@@ -61,7 +61,7 @@ export default function Home({ products }) {
             >
               <img
                 src={
-                  "https://www.transparentpng.com/thumb/coffee/TgK6AC-coffee-transparent-image.png"
+                  'https://www.transparentpng.com/thumb/coffee/TgK6AC-coffee-transparent-image.png'
                 }
                 alt=""
                 className={`${styles.carouselImage}`}
@@ -79,7 +79,7 @@ export default function Home({ products }) {
             >
               <img
                 src={
-                  "https://www.transparentpng.com/thumb/coffee/bEnole-coffee-heart-free-png.png"
+                  'https://www.transparentpng.com/thumb/coffee/bEnole-coffee-heart-free-png.png'
                 }
                 alt=""
                 className={`${styles.carouselImage}`}
@@ -96,7 +96,7 @@ export default function Home({ products }) {
             >
               <img
                 src={
-                  "https://www.transparentpng.com/thumb/coffee/v6EtCB-coffee-transparent-background.png"
+                  'https://www.transparentpng.com/thumb/coffee/v6EtCB-coffee-transparent-background.png'
                 }
                 alt=""
                 className={`${styles.carouselImage}`}
@@ -185,7 +185,7 @@ export default function Home({ products }) {
       <div className="row">
         <p className={`${styles.deal} text-center`}>Deals of the day</p>
 
-        <Carousel>{renderProducts()}</Carousel>
+        <Carousel controls={false}>{renderProducts()}</Carousel>
       </div>
     </div>
   );

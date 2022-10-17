@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { Carousel } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import API from "../../axios";
-import allActions from "../../redux/actions";
-import styles from "../../styles/Product.module.css";
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Carousel, Toast, ToastContainer } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import API from '../../axios';
+import allActions from '../../redux/actions';
+import styles from '../../styles/Product.module.css';
 
 export async function getServerSideProps(context) {
   // Fetch data from external API
 
-  const product = await API.get("/products/" + context.params.id);
+  const product = await API.get('/products/' + context.params.id);
 
   return { props: { product: product.data } };
 }
@@ -19,9 +19,11 @@ function ProductId({ product }) {
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
 
   const handleAddQuantity = () => {
-    dispatch(allActions.cartActions.addToCart({ _id, quantity }));
+    dispatch(allActions.cartActions.addToCart({ _id: product._id, quantity }));
+    setShow(true);
     setQuantity(0);
   };
 
@@ -53,7 +55,7 @@ function ProductId({ product }) {
               <div className="col-lg-7 col-sm-12">
                 <div className="row">
                   <p className={`${styles.price}`}>
-                    {product.price["$numberDecimal"] + "€"}
+                    {product.price['$numberDecimal'] + '€'}
                   </p>
                 </div>
                 <div className="row">
@@ -68,7 +70,7 @@ function ProductId({ product }) {
                   <div className="col-2">
                     <input
                       className="input w-100"
-                      type={"number"}
+                      type={'number'}
                       value={quantity}
                       max={product.quantity}
                       step={1}
@@ -91,6 +93,29 @@ function ProductId({ product }) {
         </div>
         <div className="col-1"></div>
       </div>
+      {show && (
+        <ToastContainer className="p-3" position={'bottom-end'}>
+          <Toast
+            onClose={() => setShow(false)}
+            animation={true}
+            delay={2000}
+            autohide={true}
+            show={show}
+          >
+            <Toast.Header closeButton={true}>
+              <img
+                src="/logo.png"
+                className="rounded me-2"
+                height={20}
+                width={20}
+                alt=""
+              />
+              <strong className="me-auto">Information</strong>
+            </Toast.Header>
+            <Toast.Body>Produit ajouté au panier</Toast.Body>
+          </Toast>
+        </ToastContainer>
+      )}
     </div>
   );
 }
