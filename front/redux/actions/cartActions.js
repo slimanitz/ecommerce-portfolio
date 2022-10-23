@@ -5,4 +5,11 @@ const addToCart = (product) => {
   };
 };
 
-export default { addToCart };
+const removeFromCart = ({ _id }) => {
+  return {
+    type: "REMOVE_FROM_CART",
+    payload: _id,
+  };
+};
+
+export default { addToCart, removeFromCart };

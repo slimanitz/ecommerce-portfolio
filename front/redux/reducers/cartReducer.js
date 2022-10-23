@@ -18,7 +18,7 @@ const currentCart = (state = { cart: [] }, action) => {
     case "REMOVE_FROM_CART":
       return {
         ...state,
-        cart: state.cart.filter((e) => e._id === action.payload),
+        cart: state.cart.filter((e) => e._id !== action.payload),
       };
 
     default:
