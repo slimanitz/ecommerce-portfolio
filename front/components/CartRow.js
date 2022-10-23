@@ -1,13 +1,22 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import cartActions from "../redux/actions/cartActions";
 import styles from "../styles/CartRow.module.css";
 
 export default function CartRow({ product }) {
-  console.log(product);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const handleRemoveProduct = () => {
+    dispatch(cartActions.removeFromCart(product));
+  };
   return (
-    <div className={`row p-4 ${styles.background}`}>
+    <div className={`row p-4 ${styles.background} rounded`}>
       <div className={`col-2 `}>
         <Image
+          onClick={() => router.push(`/products/${product._id}`)}
           className="rounded"
+          role={"button"}
           layout="responsive"
           height={50}
           width={50}
@@ -18,7 +27,7 @@ export default function CartRow({ product }) {
       <div className="col-8">
         <div className="row">
           <div className="col-6">
-            <p className={`${styles.name}}} `}>{product.name}</p>
+            <p className={`${styles.name} `}>{product.name}</p>
           </div>
           <div className="col-3">
             <p className=""> QTY:</p>
@@ -30,7 +39,7 @@ export default function CartRow({ product }) {
         <div className="row">
           <div className="col-6">
             <p className={`${styles.price}}}`}>
-              {product.price["$numberDecimal"]}
+              {product.price["$numberDecimal"]}€
             </p>
           </div>
           <div className="col-3">
@@ -38,7 +47,8 @@ export default function CartRow({ product }) {
           </div>
           <div className="col-3">
             <p className={`${styles.price}}}`}>
-              {product.price["$numberDecimal"] * product.quantity}
+              {(product.price["$numberDecimal"] * product.quantity).toFixed(2)}{" "}
+              €
             </p>
           </div>
         </div>
@@ -46,7 +56,17 @@ export default function CartRow({ product }) {
           <p className={`${styles.name}}}`}>{product.name}</p> //HERE WHERE YOU SHOULD ADD YOUR NEW FIELDS SIZE COLOR ETC ...
         </div> */}
       </div>
-      <div className="col-2"></div>
+      <div className="col-2 ml-auto text-right my-auto">
+        <Image
+          src={"/trash.svg"}
+          alt="trash"
+          role={"button"}
+          onClick={handleRemoveProduct}
+          layout="fixed"
+          width={20}
+          height={20}
+        />
+      </div>
     </div>
   );
 }
