@@ -12,4 +12,11 @@ const removeFromCart = ({ _id }) => {
   };
 };
 
-export default { addToCart, removeFromCart };
+const editQuantity = (product) => {
+  return {
+    type: "EDIT_QUANTITY",
+    payload: product,
+  };
+};
+
+export default { addToCart, removeFromCart, editQuantity };

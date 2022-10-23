@@ -7,9 +7,7 @@ import styles from "../styles/CartRow.module.css";
 export default function CartRow({ product }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const handleRemoveProduct = () => {
-    dispatch(cartActions.removeFromCart(product));
-  };
+
   return (
     <div className={`row p-4 ${styles.background} rounded`}>
       <div className={`col-2 `}>
@@ -43,12 +41,38 @@ export default function CartRow({ product }) {
             </p>
           </div>
           <div className="col-3">
-            <p className={`${styles.price}}}`}>{product.quantity}</p>
+            <p className={`${styles.price}}}`}>
+              {product.quantity}
+              <button
+                className="btn btn-primary rounded-circle"
+                onClick={() =>
+                  dispatch(
+                    cartActions.editQuantity({ _id: product._id, quantity: 1 })
+                  )
+                }
+              >
+                +
+              </button>
+              <button
+                className="btn btn-danger rounded-circle"
+                onClick={() =>
+                  product.quantity === 1
+                    ? dispatch(cartActions.removeFromCart(product))
+                    : dispatch(
+                        cartActions.editQuantity({
+                          _id: product._id,
+                          quantity: -1,
+                        })
+                      )
+                }
+              >
+                -
+              </button>
+            </p>
           </div>
           <div className="col-3">
             <p className={`${styles.price}}}`}>
-              {(product.price["$numberDecimal"] * product.quantity).toFixed(2)}{" "}
-              €
+              {(product.price["$numberDecimal"] * product.quantity).toFixed(2)}€
             </p>
           </div>
         </div>
@@ -61,7 +85,7 @@ export default function CartRow({ product }) {
           src={"/trash.svg"}
           alt="trash"
           role={"button"}
-          onClick={handleRemoveProduct}
+          onClick={() => dispatch(cartActions.removeFromCart(product))}
           layout="fixed"
           width={20}
           height={20}
