@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-portfolio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:slimanitz/ecommerce-portfolio.git",
+  "author": "slimanitz <slimaneber2001@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "install": "yarn --cwd ./front install && yarn --cwd ./server install ",
+    "dev": "concurrently --kill-others \"yarn --cwd ./front dev \" \"yarn --cwd ./server dev\""
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
